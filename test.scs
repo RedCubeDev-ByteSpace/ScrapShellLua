@@ -1,0 +1,9 @@
+print [ print a ]
+color 12
+
+: thislabel
+
+set yourmom = 12
+print yourmom
+
+goto thislabel
