@@ -79,7 +79,13 @@ function ParseIf()
     table.insert(args, ParseExpression());
     table.insert(args, ConsumeNext());
     table.insert(args, ParseExpression());
-    Consume("labelprefix");
+
+    if (Cur().type == "greaterthan") then
+        table.insert(args, Consume("greaterthan"));
+    else
+        table.insert(args, Consume("labelprefix"));
+    end
+
     table.insert(args, Consume("identifier"));
 
     return {["Cmd"] = ifkw.value, ["Args"] = args};
@@ -99,4 +105,73 @@ function ParseGoto()
     table.insert(args, Consume("identifier"));
 
     return {["Cmd"] = gotokw.value, ["Args"] = args};
+end
+
+function ParseSubroutine()
+    local gotosubkw = Consume("gotosubkw");
+    local args = {};
+    table.insert(args, Consume("identifier"));
+
+    return {["Cmd"] = gotosubkw.value, ["Args"] = args};
+end
+
+function ParseReturn()
+    local returnkw = Consume("returnkw");
+    local args = {};
+
+    return {["Cmd"] = returnkw.value, ["Args"] = args};
+end
+
+
+function ParseAdd()
+    local addkw = Consume("addkw");
+    local args = {};
+    table.insert(args, ParseExpression());
+    table.insert(args, ParseExpression());
+
+    return {["Cmd"] = addkw.value, ["Args"] = args};
+end
+
+function ParseSub()
+    local subkw = Consume("subkw");
+    local args = {};
+    table.insert(args, ParseExpression());
+    table.insert(args, ParseExpression());
+
+    return {["Cmd"] = subkw.value, ["Args"] = args};
+end
+
+function ParseMul()
+    local mulkw = Consume("mulkw");
+    local args = {};
+    table.insert(args, ParseExpression());
+    table.insert(args, ParseExpression());
+
+    return {["Cmd"] = mulkw.value, ["Args"] = args};
+end
+
+function ParseDiv()
+    local divkw = Consume("divkw");
+    local args = {};
+    table.insert(args, ParseExpression());
+    table.insert(args, ParseExpression());
+
+    return {["Cmd"] = divkw.value, ["Args"] = args};
+end
+
+function ParseCon()
+    local conkw = Consume("conkw");
+    local args = {};
+    table.insert(args, ParseExpression());
+    table.insert(args, ParseExpression());
+
+    return {["Cmd"] = conkw.value, ["Args"] = args};
+end
+
+function ParseInt()
+    local intkw = Consume("intkw");
+    local args = {};
+    table.insert(args, ParseExpression());
+
+    return {["Cmd"] = intkw.value, ["Args"] = args};
 end

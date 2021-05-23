@@ -1,9 +1,42 @@
-print [ print a ]
-color 12
+write "Write a Number >> " 
+set numz = [input]
 
-: thislabel
+write "Write a second Number >> " 
+set numo = [input]
 
-set yourmom = 12
-print yourmom
+write "Write an Operator (+-*/) >> " 
+set op = [input]
 
-goto thislabel
+if op = "+" >fnadd
+if op = "-" >fnsub
+if op = "*" >fnmul
+if op = "/" >fndiv
+die
+
+
+:fnadd
+write [con [con numz " + "] numo]
+write " = "
+print [add numz numo]
+return
+
+
+:fnsub
+write [con [con numz " - "] numo]
+write " = "
+print [sub numz numo]
+return
+
+
+:fnmul
+write [con [con numz " * "] numo]
+write " = "
+print [mul numz numo]
+return
+
+
+:fndiv
+write [con [con numz " / "] numo]
+write " = "
+print [int [div numz numo]]
+return

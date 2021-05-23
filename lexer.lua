@@ -19,7 +19,7 @@ end
 
 function LexNumber()
     local num = "";
-    while (isDigit(Current()) and not EOF()) do
+    while ((isDigit(Current()) or Current() == ".") and not EOF()) do
         num = num .. Current();
         Step(1);
     end
@@ -28,7 +28,7 @@ end
 
 function LexKeyword()
     local key = "";
-    while (isLetter(Current()) and not EOF()) do
+    while ((isLetter(Current()) or isDigit(Current())  or Current() == "_") and not EOF()) do
         key = key .. Current();
         Step(1);
     end
@@ -78,20 +78,13 @@ function Lex()
         if (Current() == "\r") then token.type = "whitespace"; token.value = Current(); Step(1); end
         if (Current() == "\t") then token.type = "whitespace"; token.value = Current(); Step(1); end
 
-        -- Operators
-        if (Current() == "+") then token.type = "plus"; token.value = Current(); Step(1); end
-        if (Current() == "-") then token.type = "minus"; token.value = Current(); Step(1); end
-        if (Current() == "*") then token.type = "times"; token.value = Current(); Step(1); end
-        if (Current() == "/") then token.type = "divide"; token.value = Current(); Step(1); end
-        if (Current() == ".") then token.type = "concat"; token.value = Current(); Step(1); end
-
         -- Comperators
         if (Current() == "=") then token.type = "equals"; token.value = Current(); Step(1); end
         if (Current() == "<" and Peek(1) ~= "=") then token.type = "lessthan"; token.value = Current(); Step(1); end
         if (Current() == ">" and Peek(1) ~= "=") then token.type = "greaterthan"; token.value = Current(); Step(1); end
-        if (Current() == "!" and Peek(1) == "=") then token.type = "notequal"; token.value = Current(); Step(2); end
-        if (Current() == "<" and Peek(1) == "=") then token.type = "lessequal"; token.value = Current(); Step(2); end
-        if (Current() == ">" and Peek(1) == "=") then token.type = "greaterequal"; token.value = Current(); Step(2); end
+        if (Current() == "!" and Peek(1) == "=") then token.type = "notequal"; token.value = Current() .. Peek(1); Step(2); end
+        if (Current() == "<" and Peek(1) == "=") then token.type = "lessequal"; token.value = Current() .. Peek(1); Step(2); end
+        if (Current() == ">" and Peek(1) == "=") then token.type = "greaterequal"; token.value = Current() .. Peek(1); Step(2); end
 
         -- Brackets
         if (Current() == "{") then token.type = "openbrace"; token.value = Current(); Step(1); end

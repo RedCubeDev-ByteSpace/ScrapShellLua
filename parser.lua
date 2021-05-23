@@ -45,17 +45,23 @@ function ParseKeyword()
     elseif (Cur().type == "setkw") then
         return ParseSet();
     elseif (Cur().type == "addkw") then
-        Step(1);
+        return ParseAdd();
     elseif (Cur().type == "subkw") then
-        Step(1);
+        return ParseSub();
     elseif (Cur().type == "mulkw") then
-        Step(1);
+        return ParseMul();
     elseif (Cur().type == "divkw") then
-        Step(1);
+        return ParseDiv();
     elseif (Cur().type == "conkw") then
-        Step(1);
+        return ParseCon();
+    elseif (Cur().type == "intkw") then
+        return ParseInt();
     elseif (Cur().type == "gotokw") then
         return ParseGoto();
+    elseif (Cur().type == "gotosubkw") then
+        return ParseSubroutine();
+    elseif (Cur().type == "returnkw") then
+        return ParseReturn();
     elseif (Cur().type == "diekw") then
         return ParseDie();
     elseif (Cur().type == "ifkw") then

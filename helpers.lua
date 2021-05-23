@@ -32,6 +32,14 @@ function genWhitespace(len, max)
     return space;
 end
 
+function count(table)
+    local len = 0;
+    for key, value in pairs(table) do
+        len = len + 1;
+    end
+    return len;
+end
+
 function PrettyPrintTokens()
     Longestkw = 0;
     for key, value in pairs(Tokens) do
@@ -54,3 +62,14 @@ function PrettyPrintTokens()
         end
     end
 end
+
+Colors = {
+    [0]  = "\27[30m",
+    [1]  = "\27[31m",
+    [2]  = "\27[32m",
+    [3]  = "\27[33m",
+    [4]  = "\27[34m",
+    [5]  = "\27[35m",
+    [6]  = "\27[36m",
+    [7]  = "\27[37m"
+}
