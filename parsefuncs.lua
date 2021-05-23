@@ -88,6 +88,18 @@ function ParseIf()
 
     table.insert(args, Consume("identifier"));
 
+    if (Cur().type == "elsekw") then
+        table.insert(args, Consume("elsekw"));
+        
+        if (Cur().type == "greaterthan") then
+            table.insert(args, Consume("greaterthan"));
+        else
+            table.insert(args, Consume("labelprefix"));
+        end
+    
+        table.insert(args, Consume("identifier"));
+    end
+
     return {["Cmd"] = ifkw.value, ["Args"] = args};
 end
 

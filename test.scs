@@ -7,35 +7,35 @@ set numo = [input]
 write "Write an Operator (+-*/) >> " 
 set op = [input]
 
-if op = "+" >fnadd
-if op = "-" >fnsub
-if op = "*" >fnmul
-if op = "/" >fndiv
+if op = "+" >fn_add
+if op = "-" >fn_sub
+if op = "*" >fn_mul
+if op = "/" >fn_div
 die
 
 
-:fnadd
+:fn_add
 write [con [con numz " + "] numo]
 write " = "
 print [add numz numo]
 return
 
 
-:fnsub
+:fn_sub
 write [con [con numz " - "] numo]
 write " = "
 print [sub numz numo]
 return
 
 
-:fnmul
+:fn_mul
 write [con [con numz " * "] numo]
 write " = "
 print [mul numz numo]
 return
 
 
-:fndiv
+:fn_div
 write [con [con numz " / "] numo]
 write " = "
 print [int [div numz numo]]

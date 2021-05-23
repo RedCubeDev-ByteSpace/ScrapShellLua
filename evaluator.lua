@@ -93,13 +93,14 @@ function EvaluateStatement(stmt)
     elseif (stmt.Cmd == "if") then
         local a = GetValue(stmt.Args[1]);
         local b = GetValue(stmt.Args[3]);
+        local hasElse = stmt.Args[6] ~= nil;
         
-        if (stmt.Args[2].value == "=") then if (a == b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end end end
-        if (stmt.Args[2].value == "<") then if (a < b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end end end
-        if (stmt.Args[2].value == ">") then if (a > b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end end end
-        if (stmt.Args[2].value == "!=") then if (a ~= b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end end end
-        if (stmt.Args[2].value == "<=") then if (a <= b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end end end
-        if (stmt.Args[2].value == ">=") then if (a >= b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end end end
+        if (stmt.Args[2].value == "=") then if (a == b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end elseif (hasElse) then if (stmt.Args[7].value == ">") then GotoSub(stmt.Args[8].value) else Goto(stmt.Args[8].value) end end end
+        if (stmt.Args[2].value == "<") then if (a < b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end elseif (hasElse) then if (stmt.Args[7].value == ">") then GotoSub(stmt.Args[8].value) else Goto(stmt.Args[8].value) end end end
+        if (stmt.Args[2].value == ">") then if (a > b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end elseif (hasElse) then if (stmt.Args[7].value == ">") then GotoSub(stmt.Args[8].value) else Goto(stmt.Args[8].value) end end end
+        if (stmt.Args[2].value == "!=") then if (a ~= b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end elseif (hasElse) then if (stmt.Args[7].value == ">") then GotoSub(stmt.Args[8].value) else Goto(stmt.Args[8].value) end end end
+        if (stmt.Args[2].value == "<=") then if (a <= b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end elseif (hasElse) then if (stmt.Args[7].value == ">") then GotoSub(stmt.Args[8].value) else Goto(stmt.Args[8].value) end end end
+        if (stmt.Args[2].value == ">=") then if (a >= b) then if (stmt.Args[4].value == ">") then GotoSub(stmt.Args[5].value) else Goto(stmt.Args[5].value) end elseif (hasElse) then if (stmt.Args[7].value == ">") then GotoSub(stmt.Args[8].value) else Goto(stmt.Args[8].value) end end end
     end
 end
 
