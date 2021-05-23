@@ -1,8 +1,8 @@
 write "Write a Number >> " 
-set numz = [input]
+set num0 = [input]
 
 write "Write a second Number >> " 
-set numo = [input]
+set num1 = [input]
 
 write "Write an Operator (+-*/) >> " 
 set op = [input]
@@ -15,28 +15,28 @@ die
 
 
 :fn_add
-write [con [con numz " + "] numo]
+write [con [con num0 " + "] num1]
 write " = "
-print [add numz numo]
+print [add num0 num1]
 return
 
 
 :fn_sub
-write [con [con numz " - "] numo]
+write [con [con num0 " - "] num1]
 write " = "
-print [sub numz numo]
+print [sub num0 num1]
 return
 
 
 :fn_mul
-write [con [con numz " * "] numo]
+write [con [con num0 " * "] num1]
 write " = "
-print [mul numz numo]
+print [mul num0 num1]
 return
 
 
 :fn_div
-write [con [con numz " / "] numo]
+write [con [con num0 " / "] num1]
 write " = "
-print [int [div numz numo]]
+print [int [div num0 num1]]
 return

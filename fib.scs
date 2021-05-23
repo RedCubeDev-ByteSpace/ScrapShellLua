@@ -1,0 +1,14 @@
+set current = 1
+set last = 0
+
+print last
+
+:loop
+
+print current
+set a = current
+set current = [add last current]
+set last = a
+
+goto loop
+# if current < 1000 :loop

@@ -1,6 +1,7 @@
 dofile("./helpers.lua");
 
-Cod = read_file("./test.scs");
+Verbose = false;
+Cod = read_file("./fib.scs");
 Code = "";
 
 dofile("./keywords.lua");
@@ -17,21 +18,23 @@ for i = 1, Cod:len(), 1 do
     if ((char == "[" or char == "]" or char == ":" or char == ">") and not inString) then Code = Code .. " "; end
 end
 
-print("\nLexer Output:");
+if (Verbose) then print("\nLexer Output:"); end
 Lex();
-PrettyPrintTokens();
+if (Verbose) then PrettyPrintTokens(); end
 
-print("\nParser Output:");
+if (Verbose) then print("\nParser Output:"); end
 
 Parse();
 
-for key, value in pairs(Statements) do
-    print("\27[37m" .. key .. ": \27[31m" .. value.Cmd);
-    for k, v in pairs(value.Args) do
-        print("\27[37m |- [ Type: \27[32m" .. v.type .. "\27[37m ]");
+if (Verbose) then 
+    for key, value in pairs(Statements) do
+        print("\27[37m" .. key .. ": \27[31m" .. value.Cmd);
+        for k, v in pairs(value.Args) do
+            print("\27[37m |- [ Type: \27[32m" .. v.type .. "\27[37m ]");
+        end
     end
 end
 
-print("\n\27[37mEvaluator Output:");
+if (Verbose) then print("\n\27[37mEvaluator Output:"); end
 
 Evaluate();

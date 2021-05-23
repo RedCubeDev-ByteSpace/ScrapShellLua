@@ -1,0 +1,8 @@
+gotosub label
+print "gamer"
+die
+
+
+:label
+print "bruh"
+return
